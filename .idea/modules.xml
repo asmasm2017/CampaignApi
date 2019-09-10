@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/IndosatCommunityAPI.iml" filepath="$PROJECT_DIR$/IndosatCommunityAPI.iml" />
+      <module fileurl="file://$PROJECT_DIR$/CampaignApi.iml" filepath="$PROJECT_DIR$/CampaignApi.iml" />
     </modules>
   </component>
 </project>
