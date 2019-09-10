@@ -13,7 +13,7 @@
 	<version>0.0.2-SNAPSHOT</version>
 	<name>IndosatCommunityAPI</name>
 	<description>IndosatCommunityAPI using Spring Boot</description>
-<!--dfd-->
+
 	<properties>
 		<java.version>1.8</java.version>
 	</properties>
@@ -37,7 +37,7 @@
 			<artifactId>oracle.jdbc</artifactId>
 			<version>1.0</version>
 			<scope>system</scope>
-      <systemPath>D:\PROJECT\RBT\lib_rbt\ojdbc7.jar</systemPath>
+      <systemPath>/home/wahyu/Documents/Projects/JAVA/CampaignApi/libs/ojdbc7.jar</systemPath>
  	</dependency>
 		<dependency>
 			<groupId>com.jolbox</groupId>
