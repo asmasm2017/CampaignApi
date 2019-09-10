@@ -29,7 +29,15 @@ public class ClaimService
         MsisdnEncryption me=new MsisdnEncryption(ConstantVar.secretKey);
         String msisdn= me.decrypt(encryptedMsisdn);
         System.out.println("param:"+encryptedMsisdn+ " ,msisdn:"+msisdn);
+        claimTest=new ClaimTest();
+        if(msisdn==null || encryptedMsisdn.equalsIgnoreCase(""))
+        {
+            claimTest.setResponse_code("120");
+            claimTest.setResponse_message("Error : No MSISDN Header");
+            return claimTest;
+        }
         //>>>
+
         //encrypt token and compare it with requester token<<<
         String generatedTokenByService = Hashing.sha256()
                 .hashString(ConstantVar.serviceClaimRewardToken, StandardCharsets.UTF_8)
@@ -43,11 +51,13 @@ public class ClaimService
         {
             System.out.println("ERROR TOKEN MISMATCH");
             //TODO: response code 130
+            claimTest.setResponse_code("130");
+            claimTest.setResponse_message("Error : Header Token mismatch");
+            return claimTest;
         }
         //>>>
 
         LOG.debug("TODO check SSP response for msisdn:"+msisdn);
-        claimTest=new ClaimTest();
         if(sspResult==true)
         {
             claimTest.setResponse_code("0");

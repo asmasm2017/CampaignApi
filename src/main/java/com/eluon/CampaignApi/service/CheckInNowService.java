@@ -34,6 +34,11 @@ public class CheckInNowService
         MsisdnEncryption me=new MsisdnEncryption(ConstantVar.secretKey);
         String msisdn= me.decrypt(encryptedMsisdn);
         System.out.println("param:"+encryptedMsisdn+ " ,msisdn:"+msisdn);
+        if(msisdn==null || msisdn.equalsIgnoreCase("") || encryptedMsisdn.equalsIgnoreCase(""))
+        {
+            baseResponse=new BaseResponse("120","Error : No MSISDN Header");
+            return baseResponse;
+        }
         //>>>
 
         //encrypt token and compare it with requester token<<<
@@ -47,14 +52,17 @@ public class CheckInNowService
         }
         else
         {
+
             System.out.println("ERROR TOKEN MISMATCH");
-            //TODO: response code 130
+            // response code 130
+            baseResponse=new BaseResponse("130","Error : Header Token mismatch");
+            return baseResponse;
         }
         //>>>
         /*TODO:  hit module yang ke ssp */
         LOG.debug("TODO hit ssp with msidn:"+msisdn);
         sspResult=true; //DUMMY
-        if(sspResult=true)
+        if(sspResult)
         {
             baseResponse=new BaseResponse("0","ok");
         }
