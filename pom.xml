@@ -13,7 +13,7 @@
 	<version>0.0.2-SNAPSHOT</version>
 	<name>IndosatCommunityAPI</name>
 	<description>IndosatCommunityAPI using Spring Boot</description>
-<!--d-->
+<!--ds-->
 	<properties>
 		<java.version>1.8</java.version>
 	</properties>
