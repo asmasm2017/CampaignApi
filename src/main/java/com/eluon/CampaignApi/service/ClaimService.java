@@ -2,9 +2,8 @@ package com.eluon.CampaignApi.service;
 
 import com.eluon.CampaignApi.constant.ConstantVar;
 import com.eluon.CampaignApi.responseEntity.BaseResponse;
-
+import com.eluon.CampaignApi.entity.ClaimTest;
 import com.eluon.CampaignApi.entity.RewardValid;
-import com.eluon.CampaignApi.responseEntity.ClaimResponse;
 import com.eluon.CampaignApi.util.MsisdnEncryption;
 import com.google.common.hash.Hashing;
 import org.slf4j.Logger;
@@ -17,13 +16,13 @@ import java.nio.charset.StandardCharsets;
 @Service
 public class ClaimService
 {
-    ClaimResponse claimResponse;
+    ClaimTest claimTest;
     RewardValid rewardValid;
     boolean sspResult;
 
     private static final Logger LOG = LoggerFactory.getLogger(ClaimService.class);
 
-    public ClaimResponse getClaimResponse(String  encryptedMsisdn, String encryptedToken)
+    public ClaimTest getClaimResponse(String  encryptedMsisdn,String encryptedToken)
     {
         sspResult=true; //DUMMY
         //decrypt msisdn<<<
@@ -48,22 +47,22 @@ public class ClaimService
         //>>>
 
         LOG.debug("TODO check SSP response for msisdn:"+msisdn);
-        claimResponse=new ClaimResponse();
+        claimTest=new ClaimTest();
         if(sspResult==true)
         {
-            claimResponse.setResponse_code("0");
-            claimResponse.setResponse_message("ok");
+            claimTest.setResponse_code("0");
+            claimTest.setResponse_message("ok");
             rewardValid=new RewardValid("500M","7 days");
-            claimResponse.setData(rewardValid);
+            claimTest.setData(rewardValid);
         }
         else
         {
-            claimResponse.setResponse_code("-1");
-            claimResponse.setResponse_message("failed");
+            claimTest.setResponse_code("-1");
+            claimTest.setResponse_message("failed");
             rewardValid=new RewardValid("500M","7 days");
-            claimResponse.setData(rewardValid);
+            claimTest.setData(rewardValid);
         }
-        return claimResponse;
+        return claimTest;
     }
 
 }

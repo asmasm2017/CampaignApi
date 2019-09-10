@@ -54,7 +54,7 @@ public class CheckInNowService
         /*TODO:  hit module yang ke ssp */
         LOG.debug("TODO hit ssp with msidn:"+msisdn);
         sspResult=true; //DUMMY
-        if(sspResult)
+        if(sspResult=true)
         {
             baseResponse=new BaseResponse("0","ok");
         }

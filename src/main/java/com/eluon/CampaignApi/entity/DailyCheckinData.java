@@ -1,6 +1,5 @@
 package com.eluon.CampaignApi.entity;
 
-import com.eluon.CampaignApi.responseEntity.PointRewardResponse;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -9,7 +8,7 @@ public class DailyCheckinData
 {
     boolean already_checkin_today;
     boolean can_claim_reward;
-    List<PointRewardResponse> pointRewardList;
+    List<PointReward> pointRewardList;
     int remaining_point;
     int number_of_days;
     DaysData days_data;
@@ -18,7 +17,7 @@ public class DailyCheckinData
     {
     }
 
-    public DailyCheckinData(boolean already_checkin_today, boolean can_claim_reward, List<PointRewardResponse> pointRewardList, int remaining_point, int number_of_days, DaysData days_data)
+    public DailyCheckinData(boolean already_checkin_today, boolean can_claim_reward, List<PointReward> pointRewardList, int remaining_point, int number_of_days, DaysData days_data)
     {
         this.already_checkin_today = already_checkin_today;
         this.can_claim_reward = can_claim_reward;
@@ -48,12 +47,12 @@ public class DailyCheckinData
         this.can_claim_reward = can_claim_reward;
     }
 
-    public List<PointRewardResponse> getPointRewardList()
+    public List<PointReward> getPointRewardList()
     {
         return pointRewardList;
     }
 
-    public void setPointRewardList(List<PointRewardResponse> pointRewardList)
+    public void setPointRewardList(List<PointReward> pointRewardList)
     {
         this.pointRewardList = pointRewardList;
     }

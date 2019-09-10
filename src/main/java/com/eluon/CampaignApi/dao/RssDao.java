@@ -49,7 +49,7 @@ public class RssDao
         String sql="select * from rss where type = ? ";
         RowMapper<Rss> rowMapper = new BeanPropertyRowMapper<Rss>(Rss.class);
         rssList=jdbcTemplate.query(
-                sql,new Object[]{"interesting"},
+                sql,new Object[]{type},
                 rowMapper
         );
         return rssList;
