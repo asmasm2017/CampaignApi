@@ -5,6 +5,7 @@ import com.eluon.CampaignApi.dao.RssDao;
 import com.eluon.CampaignApi.entity.ImageTitleUrl;
 import com.eluon.CampaignApi.entity.MsisdnBalanceQuota;
 import com.eluon.CampaignApi.entity.Rss;
+import com.eluon.CampaignApi.entity.SSPInfoResult;
 import com.eluon.CampaignApi.responseEntity.MsisdnInfoResponse;
 import com.eluon.CampaignApi.util.MsisdnEncryption;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,8 @@ public class MsisdnInfoService
     @Autowired
     RssDao rssDao;
 
+    @Autowired
+    SSPService sspService;
     public MsisdnInfoResponse getMsisdnInfoResponse(String encryptedMsisdn)
     {
         List<ImageTitleUrl> imageTitleUrls=new ArrayList<>();
@@ -35,9 +38,17 @@ public class MsisdnInfoService
         msisdnInfoResponse.setResponse_code("0");
         msisdnInfoResponse.setResponse_message("this is ok");
 
+        SSPInfoResult info =  sspService.getInfo("081295950001");
         MsisdnBalanceQuota msisdnBalanceQuota=new MsisdnBalanceQuota();
-        msisdnBalanceQuota.setBalance(5000);
-        msisdnBalanceQuota.setQuota(20000);
+        if (info.result){
+            long balance = (Long) info.content.get("balance");
+            String quota = (String) info.content.get("packageQuotaUnit");
+            msisdnBalanceQuota.setBalance((int)balance);
+            msisdnBalanceQuota.setQuota(Integer.parseInt(quota));
+        } else {
+            msisdnBalanceQuota.setBalance(0);
+            msisdnBalanceQuota.setQuota(0);
+        }
         msisdnBalanceQuota.setMsisdn("081295950001");
 
         ImageTitleUrl imageTitleUrl1 = new ImageTitleUrl("http://image1.jpg", "title1", "http://url1.com");
