@@ -8,7 +8,7 @@ import java.sql.Timestamp;
 public class Rss
 {
    String source_url;
-   int limit;
+   int limit_display;
    char status;
    Timestamp created_date;
    Timestamp updated_date;
@@ -18,10 +18,10 @@ public class Rss
     {
     }
 
-    public Rss(String source_url, int limit, char status, Timestamp created_date, Timestamp updated_date, String type)
+    public Rss(String source_url, int limit_display, char status, Timestamp created_date, Timestamp updated_date, String type)
     {
         this.source_url = source_url;
-        this.limit = limit;
+        this.limit_display = limit_display;
         this.status = status;
         this.created_date = created_date;
         this.updated_date = updated_date;
@@ -38,14 +38,14 @@ public class Rss
         this.source_url = source_url;
     }
 
-    public int getLimit()
+    public int getLimit_display()
     {
-        return limit;
+        return limit_display;
     }
 
-    public void setLimit(int limit)
+    public void setLimit_display(int limit_display)
     {
-        this.limit = limit;
+        this.limit_display = limit_display;
     }
 
     public char getStatus()

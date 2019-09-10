@@ -19,7 +19,7 @@ public class DailyCheckinDao
     MsisdnCheckin msisdnCheckin;
     public MsisdnCheckin getCheckInByMsisdn(String msisdn)
     {
-        String sql="select * from msisdn_checkin where msisdn = ? limit 1";
+        String sql="select * from msisdn_checkin where msisdn = ?";
         RowMapper<MsisdnCheckin> rowMapper = new BeanPropertyRowMapper<MsisdnCheckin>(MsisdnCheckin.class);
         msisdnCheckin=jdbcTemplate.queryForObject(
                 sql,new Object[]{msisdn},

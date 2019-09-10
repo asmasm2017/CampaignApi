@@ -1,7 +1,5 @@
 package com.eluon.CampaignApi.entity;
 
-import com.sun.prism.Image;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -11,12 +9,12 @@ public class MsisdnBalanceQuota
     String msisdn;
     int balance;
     int quota;
-    List<ImageTitleUrl> rss_trending;
-    List<ImageTitleUrl> rss_interesting;
+    List<ImageTitleUrlTrending> rss_trending;
+    List<ImageTitleUrlInteresting> rss_interesting;
 
     public MsisdnBalanceQuota()
     { }
-    public MsisdnBalanceQuota(String msisdn, int balance, int quota, List<ImageTitleUrl> rss_trending, List<ImageTitleUrl> rss_interesting)
+    public MsisdnBalanceQuota(String msisdn, int balance, int quota, List<ImageTitleUrlTrending> rss_trending, List<ImageTitleUrlInteresting> rss_interesting)
     {
         this.msisdn = msisdn;
         this.balance = balance;
@@ -55,22 +53,22 @@ public class MsisdnBalanceQuota
         this.quota = quota;
     }
 
-    public List<ImageTitleUrl> getRss_trending()
+    public List<ImageTitleUrlTrending> getRss_trending()
     {
         return rss_trending;
     }
 
-    public void setRss_trending(List<ImageTitleUrl> rss_trending)
+    public void setRss_trending(List<ImageTitleUrlTrending> rss_trending)
     {
         this.rss_trending = rss_trending;
     }
 
-    public List<ImageTitleUrl> getRss_interesting()
+    public List<ImageTitleUrlInteresting> getRss_interesting()
     {
         return rss_interesting;
     }
 
-    public void setRss_interesting(List<ImageTitleUrl> rss_interesting)
+    public void setRss_interesting(List<ImageTitleUrlInteresting> rss_interesting)
     {
         this.rss_interesting = rss_interesting;
     }
