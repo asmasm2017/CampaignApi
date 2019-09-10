@@ -1,8 +1,5 @@
 package com.eluon.CampaignApi.entity;
 
-import org.springframework.stereotype.Repository;
-
-@Repository
 public class QuotaInfo
 {
     String rewards;
