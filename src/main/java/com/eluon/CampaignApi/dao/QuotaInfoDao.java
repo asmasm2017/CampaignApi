@@ -1,7 +1,6 @@
 package com.eluon.CampaignApi.dao;
 
 import com.eluon.CampaignApi.entity.QuotaInfo;
-import com.sun.org.apache.xpath.internal.operations.Quo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
