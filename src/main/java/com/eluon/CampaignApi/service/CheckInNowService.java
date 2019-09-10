@@ -2,6 +2,8 @@ package com.eluon.CampaignApi.service;
 
 import com.eluon.CampaignApi.constant.ConstantVar;
 import com.eluon.CampaignApi.dao.DailyCheckinDao;
+import com.eluon.CampaignApi.dao.MsisdnInfoDao;
+import com.eluon.CampaignApi.entity.MsisdnInfo;
 import com.eluon.CampaignApi.responseEntity.BaseResponse;
 import com.eluon.CampaignApi.util.MsisdnEncryption;
 import com.google.common.hash.Hashing;
@@ -23,6 +25,10 @@ public class CheckInNowService
     @Autowired
     DailyCheckinDao dailyCheckinDao;
 
+    @Autowired
+    MsisdnInfo msisdnInfo;
+    @Autowired
+    MsisdnInfoDao msisdnInfoDao;
     public BaseResponse getCheckinResponse(String encryptedMsisdn,String encryptedToken)
     {
 
@@ -89,6 +95,14 @@ public class CheckInNowService
                 todayDateChecked=todayDate;
             }
             dailyCheckinDao.updateCheckIn(msisdn,'Y',todayDateChecked);
+            //update point of the msisdn<<<
+            msisdnInfo=msisdnInfoDao.getMsisdnInfoByMsisdn(msisdn);
+            int pointBeforeCheckin=msisdnInfo.getPoint();
+            int pointAfterCheckin= pointBeforeCheckin+1;
+
+            msisdnInfoDao.updateMsisdnInfo(pointAfterCheckin,msisdn);
+            System.out.println("update point of msisdn:"+msisdn+" before:"+pointBeforeCheckin+" after:"+pointAfterCheckin);
+            //>>>>
         }
         return baseResponse;
 

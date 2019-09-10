@@ -76,7 +76,7 @@
     <orderEntry type="module-library">
       <library name="Maven: ojdbc7:oracle.jdbc:1.0">
         <CLASSES>
-          <root url="jar:///home/wahyu/Documents/Projects/JAVA/CampaignApi/libs/ojdbc7.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../RBT/lib_rbt/ojdbc7.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
