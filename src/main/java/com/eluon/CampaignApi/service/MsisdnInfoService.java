@@ -27,6 +27,8 @@ public class MsisdnInfoService
 {
     @Autowired
     RssDao rssDao;
+	@Autowired
+    SSPService sspService;
 
     XmlReader xmlReader;
     public MsisdnInfoResponse getMsisdnInfoResponse(String encryptedMsisdn, String encryptedToken) throws IOException, FeedException {
@@ -57,9 +59,17 @@ public class MsisdnInfoService
                     msisdnInfoResponse.setResponse_code("0");
                     msisdnInfoResponse.setResponse_message("Success");
 
+        SSPInfoResult info =  sspService.getInfo("081295950001");
                     MsisdnBalanceQuota msisdnBalanceQuota = new MsisdnBalanceQuota();
-                    msisdnBalanceQuota.setBalance(0);
-                    msisdnBalanceQuota.setQuota(0);
+		 if (info.result){
+		            long balance = (Long) info.content.get("balance");
+		            String quota = (String) info.content.get("packageQuotaUnit");
+		            msisdnBalanceQuota.setBalance((int)balance);
+		            msisdnBalanceQuota.setQuota(Integer.parseInt(quota));
+		        } else {
+		            msisdnBalanceQuota.setBalance(0);
+		            msisdnBalanceQuota.setQuota(0);
+		        }
                     msisdnBalanceQuota.setMsisdn(decryptedMsisdn);
 
                     /*

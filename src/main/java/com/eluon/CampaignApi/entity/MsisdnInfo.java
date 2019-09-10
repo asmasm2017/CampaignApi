@@ -11,7 +11,6 @@ public class MsisdnInfo
     int days_month;
     String created_date;
     String updated_date;
-    PointReward pointReward;
 
     public MsisdnInfo()
     {
