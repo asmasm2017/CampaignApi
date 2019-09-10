@@ -14,7 +14,7 @@ public class MsisdnEncryption
             MessageDigest md = MessageDigest.getInstance("MD5");
             md.update(secretKey.getBytes());
 
-            byte[] secretKeyMd5Byte = md.digest();
+            byte secretKeyMd5Byte[] = md.digest();
             rc4 = new RC4(secretKeyMd5Byte);
 
         } catch (NoSuchAlgorithmException ex) {
