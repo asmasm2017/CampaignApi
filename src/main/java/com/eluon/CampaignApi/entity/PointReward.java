@@ -9,16 +9,18 @@ public class PointReward
     String valid;
     int redeem_parameter;
     int redeem_points;
-    String status;
+    String expired;
+    char status;
     String created_date;
     String updated_date;
 
 
-    public PointReward(String reward, String valid, int redeem_parameter, int redeem_points, String status, String created_date, String updated_date) {
+    public PointReward(String reward, String valid, int redeem_parameter, int redeem_points, String expired, char status, String created_date, String updated_date) {
         this.reward = reward;
         this.valid = valid;
         this.redeem_parameter = redeem_parameter;
         this.redeem_points = redeem_points;
+        this.expired = expired;
         this.status = status;
         this.created_date = created_date;
         this.updated_date = updated_date;
@@ -56,11 +58,19 @@ public class PointReward
         this.redeem_points = redeem_points;
     }
 
-    public String getStatus() {
+    public String getExpired() {
+        return expired;
+    }
+
+    public void setExpired(String expired) {
+        this.expired = expired;
+    }
+
+    public char getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(char status) {
         this.status = status;
     }
 
