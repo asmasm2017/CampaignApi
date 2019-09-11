@@ -75,7 +75,7 @@ public class MsisdnInfoService
                         msisdnInfo = msisdnInfoDao.getMsisdnInfoByMsisdn(decryptedMsisdn);
                         msisdnBalanceQuota.setPoint(msisdnInfo.getPoint());
 
-                        msisdnBalanceQuota.setExpired_quota(0); //darissp
+                        msisdnBalanceQuota.setExpired_quota("2019-01-01"); //darissp
                     } else {
                         msisdnBalanceQuota.setBalance(0);
                         msisdnBalanceQuota.setQuota(0);
@@ -84,7 +84,7 @@ public class MsisdnInfoService
                         msisdnInfo = msisdnInfoDao.getMsisdnInfoByMsisdn(decryptedMsisdn);
                         msisdnBalanceQuota.setPoint(msisdnInfo.getPoint());
 
-                        msisdnBalanceQuota.setExpired_quota(0); //darissp
+                        msisdnBalanceQuota.setExpired_quota("2019-01-01"); //darissp
                     }
                     msisdnBalanceQuota.setMsisdn(decryptedMsisdn);
 
