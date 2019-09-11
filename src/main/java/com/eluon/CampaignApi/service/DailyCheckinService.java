@@ -124,7 +124,7 @@ public class DailyCheckinService
                             minimumPointToRedeem = quotaInfoRedeemPoints;
                         }
 
-                        PointReward pointReward= new PointReward(quotaInfoReward,quotaInfoValid,quotaInfoRedeemParameter, quotaInfoRedeemPoints, quotaInfoStatus, quotaInfoCreatedDate, quotaInfoUpdatedDate);
+                        PointReward pointReward= new PointReward(quotaInfoReward,quotaInfoValid,quotaInfoRedeemParameter, quotaInfoRedeemPoints, "0 point will expired in 0 days", quotaInfoStatus, quotaInfoCreatedDate, quotaInfoUpdatedDate);
                         pointRewardList.add(pointReward);
 
                     }

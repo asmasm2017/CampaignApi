@@ -170,9 +170,9 @@ public class CampaignController
     {
         DailyCheckinTest dailyCheckinTest;
         List<PointReward> pointRewardList=new ArrayList<>();
-        PointReward pointReward1= new PointReward("0MB","0Days",0, 0, (char) 0, "04111989", "04111989");
-        PointReward pointReward2= new PointReward("0MB","0Days",0, 0, (char) 0, "04111989", "04111989");
-        PointReward pointReward3= new PointReward("0MB","0Days",0, 0, (char) 0, "04111989", "04111989");
+        PointReward pointReward1= new PointReward("0MB","0Days",0, 0, "0 point will expired in 0 days", (char) 0, "04111989", "04111989");
+        PointReward pointReward2= new PointReward("0MB","0Days",0, 0, "0 point will expired in 0 days", (char) 0, "04111989", "04111989");
+        PointReward pointReward3= new PointReward("0MB","0Days",0, 0, "0 point will expired in 0 days", (char) 0, "04111989", "04111989");
         pointRewardList.add(pointReward1);
         pointRewardList.add(pointReward2);
         pointRewardList.add(pointReward3);
