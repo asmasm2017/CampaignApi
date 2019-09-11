@@ -155,9 +155,9 @@ public class CampaignController
     {
         DailyCheckinTest dailyCheckinTest;
         List<PointReward> pointRewardList=new ArrayList<>();
-        PointReward pointReward1= new PointReward("0MB","0Days",0, 0, "0", "04111989", "04111989");
-        PointReward pointReward2= new PointReward("0MB","0Days",0, 0, "0", "04111989", "04111989");
-        PointReward pointReward3= new PointReward("0MB","0Days",0, 0, "0", "04111989", "04111989");
+        PointReward pointReward1= new PointReward("0MB","0Days",0, 0, (char) 0, "04111989", "04111989");
+        PointReward pointReward2= new PointReward("0MB","0Days",0, 0, (char) 0, "04111989", "04111989");
+        PointReward pointReward3= new PointReward("0MB","0Days",0, 0, (char) 0, "04111989", "04111989");
         pointRewardList.add(pointReward1);
         pointRewardList.add(pointReward2);
         pointRewardList.add(pointReward3);
@@ -195,7 +195,7 @@ public class CampaignController
         imageTitleUrlsInteresting.add(imageTitleUrlInteresting);
         imageTitleUrlsInteresting.add(imageTitleUrlInteresting2);
         imageTitleUrlsInteresting.add(imageTitleUrlInteresting3);
-        MsisdnInfoTest msisdnInfoTest = new MsisdnInfoTest("-1","failed2",new MsisdnBalanceQuota("0812959590001",3000,12000,imageTitleUrlsTrending,imageTitleUrlsInteresting));
+        MsisdnInfoTest msisdnInfoTest = new MsisdnInfoTest("-1","failed2",new MsisdnBalanceQuota("0812959590001",0,0,"2019-01-01",12000,imageTitleUrlsTrending,imageTitleUrlsInteresting));
         return msisdnInfoTest;
     }
 
