@@ -210,7 +210,7 @@ public class CampaignController
         imageTitleUrlsInteresting.add(imageTitleUrlInteresting);
         imageTitleUrlsInteresting.add(imageTitleUrlInteresting2);
         imageTitleUrlsInteresting.add(imageTitleUrlInteresting3);
-        MsisdnInfoTest msisdnInfoTest = new MsisdnInfoTest("-1","failed2",new MsisdnBalanceQuota("0812959590001",0,0,"2019-01-01",12000,imageTitleUrlsTrending,imageTitleUrlsInteresting));
+        MsisdnInfoTest msisdnInfoTest = new MsisdnInfoTest("-1","failed2",new MsisdnBalanceQuota("0812959590001",0,0,0,12000,imageTitleUrlsTrending,imageTitleUrlsInteresting));
         return msisdnInfoTest;
     }
 

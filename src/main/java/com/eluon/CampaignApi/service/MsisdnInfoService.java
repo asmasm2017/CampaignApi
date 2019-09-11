@@ -1,6 +1,7 @@
 package com.eluon.CampaignApi.service;
 
 import com.eluon.CampaignApi.constant.ConstantVar;
+import com.eluon.CampaignApi.dao.MsisdnInfoDao;
 import com.eluon.CampaignApi.dao.RssDao;
 import com.eluon.CampaignApi.entity.*;
 import com.eluon.CampaignApi.responseEntity.MsisdnInfoResponse;
@@ -27,6 +28,8 @@ public class MsisdnInfoService
 {
     @Autowired
     RssDao rssDao;
+    @Autowired
+    MsisdnInfoDao msisdnInfoDao;
     @Autowired
     SSPService sspService;
 
@@ -60,18 +63,21 @@ public class MsisdnInfoService
                     msisdnInfoResponse.setResponse_code("0");
                     msisdnInfoResponse.setResponse_message("Success");
 
-                    SSPInfoResult info = sspService.getInfo("081295950001");
+                    SSPInfoResult info = sspService.getInfo("decryptedMsisdn");
                     MsisdnBalanceQuota msisdnBalanceQuota = new MsisdnBalanceQuota();
                     if (info.result) {
                         long balance = (Long) info.content.get("balance");
                         String quota = (String) info.content.get("packageQuotaUnit");
                         msisdnBalanceQuota.setBalance((int) balance);
                         msisdnBalanceQuota.setQuota(Integer.parseInt(quota));
-                        msisdnBalanceQuota.setPoint(0);
-                        msisdnBalanceQuota.setExpired_quota("2019-01-01");
+
+                        MsisdnInfo msisdnInfo = new MsisdnInfo();
+                        msisdnInfo = msisdnInfoDao.getMsisdnInfoByMsisdn(decryptedMsisdn);
+                        msisdnBalanceQuota.setPoint(msisdnInfo.getPoint());
+                        msisdnBalanceQuota.setExpired_quota(msisdnInfo.getDays_month());
                     } else {
                         msisdnBalanceQuota.setPoint(0);
-                        msisdnBalanceQuota.setExpired_quota("2019-01-01");
+                        msisdnBalanceQuota.setExpired_quota(0);
                         msisdnBalanceQuota.setBalance(0);
                         msisdnBalanceQuota.setQuota(0);
                     }
