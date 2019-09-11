@@ -7,8 +7,8 @@ import java.util.List;
 public class MsisdnBalanceQuota
 {
     String msisdn;
-    int balance;
-    int quota;
+    long balance;
+    String quota;
     int point;
     int expired_quota;
     List<ImageTitleUrlTrending> rss_trending;
@@ -16,7 +16,8 @@ public class MsisdnBalanceQuota
 
     public MsisdnBalanceQuota()
     { }
-    public MsisdnBalanceQuota(String msisdn, int balance, int point, int expired_quota, int quota, List<ImageTitleUrlTrending> rss_trending, List<ImageTitleUrlInteresting> rss_interesting)
+
+    public MsisdnBalanceQuota(String msisdn, long balance, String quota, int point, int expired_quota, List<ImageTitleUrlTrending> rss_trending, List<ImageTitleUrlInteresting> rss_interesting)
     {
         this.msisdn = msisdn;
         this.balance = balance;
@@ -37,22 +38,22 @@ public class MsisdnBalanceQuota
         this.msisdn = msisdn;
     }
 
-    public int getBalance()
+    public long getBalance()
     {
         return balance;
     }
 
-    public void setBalance(int balance)
+    public void setBalance(long balance)
     {
         this.balance = balance;
     }
 
-    public int getQuota()
+    public String getQuota()
     {
         return quota;
     }
 
-    public void setQuota(int quota)
+    public void setQuota(String quota)
     {
         this.quota = quota;
     }
@@ -67,11 +68,13 @@ public class MsisdnBalanceQuota
         this.point = point;
     }
 
-    public int getExpired_quota() {
+    public int getExpired_quota()
+    {
         return expired_quota;
     }
 
-    public void setExpired_quota(int expired_quota) {
+    public void setExpired_quota(int expired_quota)
+    {
         this.expired_quota = expired_quota;
     }
 

@@ -67,9 +67,17 @@ public class MsisdnInfoService
                     MsisdnBalanceQuota msisdnBalanceQuota = new MsisdnBalanceQuota();
                     if (info.result) {
                         long balance = (Long) info.content.get("balance");
-                        String quota = (String) info.content.get("packageQuotaUnit");
-                        msisdnBalanceQuota.setBalance((int) balance);
-                        msisdnBalanceQuota.setQuota(Integer.parseInt(quota));
+
+
+                        StringBuilder sb=new StringBuilder();
+                        sb.append ((String) info.content.get("packageRemainingQuota"));
+                        String quotaUnit = (String) info.content.get("packageQuotaUnit");
+                        sb.append(" ");
+                        sb.append(quotaUnit);
+                        String quota=sb.toString();
+
+                        msisdnBalanceQuota.setBalance( balance);
+                        msisdnBalanceQuota.setQuota(quota);
 
                         MsisdnInfo msisdnInfo = new MsisdnInfo();
                         msisdnInfo = msisdnInfoDao.getMsisdnInfoByMsisdn(decryptedMsisdn);
@@ -78,7 +86,7 @@ public class MsisdnInfoService
                         msisdnBalanceQuota.setExpired_quota(0); //darissp
                     } else {
                         msisdnBalanceQuota.setBalance(0);
-                        msisdnBalanceQuota.setQuota(0);
+                        msisdnBalanceQuota.setQuota("0");
 
                         MsisdnInfo msisdnInfo = new MsisdnInfo();
                         msisdnInfo = msisdnInfoDao.getMsisdnInfoByMsisdn(decryptedMsisdn);
