@@ -10,13 +10,13 @@ public class MsisdnBalanceQuota
     int balance;
     int quota;
     int point;
-    int expired_quota;
+    String expired_quota;
     List<ImageTitleUrlTrending> rss_trending;
     List<ImageTitleUrlInteresting> rss_interesting;
 
     public MsisdnBalanceQuota()
     { }
-    public MsisdnBalanceQuota(String msisdn, int balance, int point, int expired_quota, int quota, List<ImageTitleUrlTrending> rss_trending, List<ImageTitleUrlInteresting> rss_interesting)
+    public MsisdnBalanceQuota(String msisdn, int balance, int point, String expired_quota, int quota, List<ImageTitleUrlTrending> rss_trending, List<ImageTitleUrlInteresting> rss_interesting)
     {
         this.msisdn = msisdn;
         this.balance = balance;
@@ -67,11 +67,11 @@ public class MsisdnBalanceQuota
         this.point = point;
     }
 
-    public int getExpired_quota() {
+    public String getExpired_quota() {
         return expired_quota;
     }
 
-    public void setExpired_quota(int expired_quota) {
+    public void setExpired_quota(String expired_quota) {
         this.expired_quota = expired_quota;
     }
 
