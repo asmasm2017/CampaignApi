@@ -9,16 +9,20 @@ public class MsisdnBalanceQuota
     String msisdn;
     int balance;
     int quota;
+    int point;
+    int expired_quota;
     List<ImageTitleUrlTrending> rss_trending;
     List<ImageTitleUrlInteresting> rss_interesting;
 
     public MsisdnBalanceQuota()
     { }
-    public MsisdnBalanceQuota(String msisdn, int balance, int quota, List<ImageTitleUrlTrending> rss_trending, List<ImageTitleUrlInteresting> rss_interesting)
+    public MsisdnBalanceQuota(String msisdn, int balance, int point, int expired_quota, int quota, List<ImageTitleUrlTrending> rss_trending, List<ImageTitleUrlInteresting> rss_interesting)
     {
         this.msisdn = msisdn;
         this.balance = balance;
         this.quota = quota;
+        this.point = point;
+        this.expired_quota = expired_quota;
         this.rss_trending = rss_trending;
         this.rss_interesting = rss_interesting;
     }
@@ -51,6 +55,24 @@ public class MsisdnBalanceQuota
     public void setQuota(int quota)
     {
         this.quota = quota;
+    }
+
+    public int getPoint()
+    {
+        return point;
+    }
+
+    public void setPoint(int point)
+    {
+        this.point = point;
+    }
+
+    public int getExpired_quota() {
+        return expired_quota;
+    }
+
+    public void setExpired_quota(int expired_quota) {
+        this.expired_quota = expired_quota;
     }
 
     public List<ImageTitleUrlTrending> getRss_trending()
