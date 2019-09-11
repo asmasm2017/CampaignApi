@@ -5,7 +5,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class QuotaInfo
 {
-    String rewards;
+    String reward;
     String valid;
     int redeem_parameter;
     int redeem_points;
@@ -13,14 +13,14 @@ public class QuotaInfo
     String created_date;
     String updated_date;
 
-    public String getRewards()
+    public String getReward()
     {
-        return rewards;
+        return reward;
     }
 
-    public void setRewards(String rewards)
+    public void setReward(String reward)
     {
-        this.rewards = rewards;
+        this.reward = reward;
     }
 
     public String getValid()

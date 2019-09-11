@@ -58,6 +58,8 @@ public class MsisdnInfoService
                     msisdnInfoResponse.setResponse_message("Success");
 
                     MsisdnBalanceQuota msisdnBalanceQuota = new MsisdnBalanceQuota();
+                    msisdnBalanceQuota.setPoint(0);
+                    msisdnBalanceQuota.setExpired_quota("2019-01-01");
                     msisdnBalanceQuota.setBalance(0);
                     msisdnBalanceQuota.setQuota(0);
                     msisdnBalanceQuota.setMsisdn(decryptedMsisdn);

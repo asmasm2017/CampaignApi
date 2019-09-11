@@ -27,7 +27,7 @@ public class QuotaInfoDao
     public List<QuotaInfo> getQuotaInfoAll()
     {
         List<QuotaInfo> quotaInfoList= new ArrayList<>();
-        String sql="select * from quota_info ";
+        String sql="select * from quota_info order by redeem_points asc";
         RowMapper<QuotaInfo> rowMapper = new BeanPropertyRowMapper<QuotaInfo>(QuotaInfo.class);
         quotaInfoList=jdbcTemplate.query(
                 sql,
