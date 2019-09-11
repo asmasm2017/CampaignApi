@@ -27,26 +27,29 @@ public class MsisdnInfoService
 {
     @Autowired
     RssDao rssDao;
+    @Autowired
+    SSPService sspService;
 
     XmlReader xmlReader;
+
     public MsisdnInfoResponse getMsisdnInfoResponse(String encryptedMsisdn, String encryptedToken) throws IOException, FeedException {
-        List<ImageTitleUrlTrending> imageTitleUrlsTrending=new ArrayList<>();
-        List<ImageTitleUrlInteresting> imageTitleUrlsInteresting=new ArrayList<>();
+        List<ImageTitleUrlTrending> imageTitleUrlsTrending = new ArrayList<>();
+        List<ImageTitleUrlInteresting> imageTitleUrlsInteresting = new ArrayList<>();
 
         //decrypt msisdn<<<
-        MsisdnEncryption me=new MsisdnEncryption(ConstantVar.secretKey);
-        String decryptedMsisdn= me.decrypt(encryptedMsisdn);
-        System.out.println("encrypted-msisdn:"+encryptedMsisdn+ " ,decrypted-msisdn:"+decryptedMsisdn);
+        MsisdnEncryption me = new MsisdnEncryption(ConstantVar.secretKey);
+        String decryptedMsisdn = me.decrypt(encryptedMsisdn);
+        System.out.println("encrypted-msisdn:" + encryptedMsisdn + " ,decrypted-msisdn:" + decryptedMsisdn);
         //>>>
 
         //encrypt token to matching requester token<<<
         String generatedTokenByService = Hashing.sha256()
                 .hashString(ConstantVar.serviceMsisdnInfoToken, StandardCharsets.UTF_8)
                 .toString();
-        System.out.println("requester-token:"+encryptedToken+ " ,generated-token:"+generatedTokenByService);
+        System.out.println("requester-token:" + encryptedToken + " ,generated-token:" + generatedTokenByService);
         //>>>
 
-        MsisdnInfoResponse msisdnInfoResponse=new MsisdnInfoResponse();
+        MsisdnInfoResponse msisdnInfoResponse = new MsisdnInfoResponse();
 
         if (encryptedMsisdn != null && encryptedMsisdn != "") {
 
@@ -57,11 +60,21 @@ public class MsisdnInfoService
                     msisdnInfoResponse.setResponse_code("0");
                     msisdnInfoResponse.setResponse_message("Success");
 
+                    SSPInfoResult info = sspService.getInfo("081295950001");
                     MsisdnBalanceQuota msisdnBalanceQuota = new MsisdnBalanceQuota();
-                    msisdnBalanceQuota.setPoint(0);
-                    msisdnBalanceQuota.setExpired_quota("2019-01-01");
-                    msisdnBalanceQuota.setBalance(0);
-                    msisdnBalanceQuota.setQuota(0);
+                    if (info.result) {
+                        long balance = (Long) info.content.get("balance");
+                        String quota = (String) info.content.get("packageQuotaUnit");
+                        msisdnBalanceQuota.setBalance((int) balance);
+                        msisdnBalanceQuota.setQuota(Integer.parseInt(quota));
+                        msisdnBalanceQuota.setPoint(0);
+                        msisdnBalanceQuota.setExpired_quota("2019-01-01");
+                    } else {
+                        msisdnBalanceQuota.setPoint(0);
+                        msisdnBalanceQuota.setExpired_quota("2019-01-01");
+                        msisdnBalanceQuota.setBalance(0);
+                        msisdnBalanceQuota.setQuota(0);
+                    }
                     msisdnBalanceQuota.setMsisdn(decryptedMsisdn);
 
                     /*
@@ -92,11 +105,10 @@ public class MsisdnInfoService
                     /* msisdnInfoResponse.setData(msisdnBalanceQuota); */
 
                     //RSS get <<<<
-                    List<Rss> rssListTrending= rssDao.getAllRssWithType("trending");
+                    List<Rss> rssListTrending = rssDao.getAllRssWithType("trending");
                     StringBuilder sbTrending;
                     xmlReader = new XmlReader();
-                    for(Rss getRssTrending:rssListTrending)
-                    {
+                    for (Rss getRssTrending : rssListTrending) {
                         String sourceUrlTrending = getRssTrending.getSource_url();
                         System.out.println(sourceUrlTrending);
                         SyndFeed rssResponseTrending = xmlReader.getSyndFeedForUrl(sourceUrlTrending);
@@ -124,12 +136,11 @@ public class MsisdnInfoService
                                 System.out.println("------------------------");
                                 ImageTitleUrlTrending imageTitleUrlTrending = new ImageTitleUrlTrending(imageTrending, titleTrending, urlTrending);
                                 imageTitleUrlsTrending.add(imageTitleUrlTrending);
-                                nowcounterTrending ++;
-                            }
-                            else {
+                                nowcounterTrending++;
+                            } else {
                                 System.out.println("SKIP => data ke : " + nowcounterTrending + ", dari limit: " + limitDisplayTrending);
                                 System.out.println("------------------------");
-                                nowcounterTrending ++;
+                                nowcounterTrending++;
                             }
                         }
                         msisdnBalanceQuota.setRss_trending(imageTitleUrlsTrending);
@@ -138,11 +149,10 @@ public class MsisdnInfoService
 
 
                     //RSS get <<<<
-                    List<Rss> rssListInteresting= rssDao.getAllRssWithType("interesting");
+                    List<Rss> rssListInteresting = rssDao.getAllRssWithType("interesting");
                     StringBuilder sbInteresting;
                     xmlReader = new XmlReader();
-                    for(Rss getRssInteresting:rssListInteresting)
-                    {
+                    for (Rss getRssInteresting : rssListInteresting) {
                         String sourceUrlInteresting = getRssInteresting.getSource_url();
                         System.out.println(sourceUrlInteresting);
                         SyndFeed rssResponseInteresting = xmlReader.getSyndFeedForUrl(sourceUrlInteresting);
@@ -170,12 +180,11 @@ public class MsisdnInfoService
                                 System.out.println("------------------------");
                                 ImageTitleUrlInteresting imageTitleUrlInteresting = new ImageTitleUrlInteresting(imageInteresting, titleInteresting, urlInteresting);
                                 imageTitleUrlsInteresting.add(imageTitleUrlInteresting);
-                                nowcounterInteresting ++;
-                            }
-                            else {
+                                nowcounterInteresting++;
+                            } else {
                                 System.out.println("SKIP => data ke : " + nowcounterInteresting + ", dari limit: " + limitDisplayInteresting);
                                 System.out.println("------------------------");
-                                nowcounterInteresting ++;
+                                nowcounterInteresting++;
                             }
                         }
                         msisdnBalanceQuota.setRss_interesting(imageTitleUrlsInteresting);
@@ -183,19 +192,16 @@ public class MsisdnInfoService
                     //>>>RSS get
 
                     msisdnInfoResponse.setData(msisdnBalanceQuota);
-                }
-                else {
+                } else {
                     msisdnInfoResponse.setResponse_code("130");
                     msisdnInfoResponse.setResponse_message("Error : Header Token mismatch");
                 }
 
-            }
-            else {
+            } else {
                 msisdnInfoResponse.setResponse_code("121");
                 msisdnInfoResponse.setResponse_message("Error : No TOKEN Header");
             }
-        }
-        else {
+        } else {
             msisdnInfoResponse.setResponse_code("120");
             msisdnInfoResponse.setResponse_message("Error : No MSISDN Header");
         }

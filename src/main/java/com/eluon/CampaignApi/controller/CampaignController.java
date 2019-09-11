@@ -67,23 +67,16 @@ public class CampaignController
 
 
     //BELOW API'S as GOOGLEDOCS
-//    @RequestMapping(value = "/campaign_ads" , method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-//    public CampaignAdsResponse campaign_ads(@RequestBody CampaignAdsRequest campaignAdsRequest, @RequestHeader("msisdn") String msisdn)
-//    {
-//        CampaignAdsResponse campaignAdsResponse;
-//        campaignAdsResponse=campaignAdsService.getCampaignAdsResponse(msisdn,campaignAdsRequest);
-//        //return new CampaignAdsResponse("http://url.to.content");
-//
-//        return campaignAdsResponse;
-//    }
 
 
-
-    @RequestMapping(value = "/campaign_ads" , method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void campaign_ads(@RequestBody CampaignAdsRequest campaignAdsRequest, @RequestHeader("msisdn") String msisdn,HttpServletResponse httpServletResponse,@RequestHeader("token") String encryptedToken)
-     {
+    @RequestMapping(value = "/campaign_ads" , method = RequestMethod.GET)
+    public void campaign_ads(@RequestParam("type") String type, @RequestParam("width") String width,@RequestParam("height") String height, @RequestHeader("msisdn") String msisdn,HttpServletResponse httpServletResponse,@RequestHeader("token") String encryptedToken)
+    {
         String redirect_to_url=null;
         String default_url= ConstantVar.defaultRedirectToUrl;
+        campaignAdsRequest.setHeight(height);
+        campaignAdsRequest.setType(type);
+        campaignAdsRequest.setWeight(width);
         redirect_to_url=campaignAdsService.getCampaignAdsResponse(msisdn,campaignAdsRequest,encryptedToken);
         if(redirect_to_url!=null)
         {
@@ -98,6 +91,28 @@ public class CampaignController
         httpServletResponse.setStatus(302);
 
     }
+
+
+//
+//    @RequestMapping(value = "/campaign_ads" , method = RequestMethod.GET, consumes = MediaType.APPLICATION_JSON_VALUE)
+//    public void campaign_ads(@RequestBody CampaignAdsRequest campaignAdsRequest, @RequestHeader("msisdn") String msisdn,HttpServletResponse httpServletResponse,@RequestHeader("token") String encryptedToken)
+//     {
+//        String redirect_to_url=null;
+//        String default_url= ConstantVar.defaultRedirectToUrl;
+//        redirect_to_url=campaignAdsService.getCampaignAdsResponse(msisdn,campaignAdsRequest,encryptedToken);
+//        if(redirect_to_url!=null)
+//        {
+//            System.out.println("redirect to url_asset:"+redirect_to_url);
+//            httpServletResponse.setHeader("Location", redirect_to_url);
+//        }
+//        else
+//        {
+//            System.out.println("redirect to url_asset:"+default_url);
+//            httpServletResponse.setHeader("Location", default_url);
+//        }
+//        httpServletResponse.setStatus(302);
+//
+//    }
 
     @RequestMapping(value = "/check_in_now" , method = RequestMethod.POST)
     public BaseResponse checkInNow(@RequestHeader("msisdn") String msisdn,@RequestHeader("token") String encryptedToken)
@@ -115,7 +130,7 @@ public class CampaignController
 
     @RequestMapping(value = "/msisdn_info" , method = RequestMethod.POST)
     public MsisdnInfoResponse msisdnInfo(@RequestHeader("msisdn") String encryptedMsisdn, @RequestHeader("token") String encryptedToken)
-    {
+   {
         MsisdnInfoResponse msisdnInfoResponse = null;
         try {
             msisdnInfoResponse = msisdnInfoService.getMsisdnInfoResponse(encryptedMsisdn, encryptedToken);

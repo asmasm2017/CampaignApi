@@ -40,6 +40,14 @@ public class CampaignAdsService
         MsisdnEncryption me = new MsisdnEncryption(ConstantVar.secretKey);
         String msisdn = me.decrypt(encryptedMsisdn);
         System.out.println("param:" + encryptedMsisdn + " ,msisdn:" + msisdn);
+        campaignAdsResponse = new CampaignAdsResponse();
+
+        if(msisdn==null || msisdn.equalsIgnoreCase("") || encryptedMsisdn.equalsIgnoreCase(""))
+        {
+            campaignAdsResponse.setResponse_code("120");
+            campaignAdsResponse.setResponse_message("Error : No MSISDN Header");
+
+        }
         //>>>
         //encrypt token and compare it with requester token<<<
         String generatedTokenByService = Hashing.sha256()
@@ -65,7 +73,6 @@ public class CampaignAdsService
 
 
         //set response==========================
-        campaignAdsResponse = new CampaignAdsResponse();
         campaignAdsResponse.setResponse_code("0");
         campaignAdsResponse.setResponse_message("ok");
 
