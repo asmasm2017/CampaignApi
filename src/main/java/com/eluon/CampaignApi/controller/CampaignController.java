@@ -43,7 +43,10 @@ public class CampaignController
     DailyCheckinService dailyCheckinService;
 
 
-
+    @RequestMapping("/")
+    public String hello() {
+    	return "Im3Community is working";
+    }
 
 
     @RequestMapping(value = "/checkheader/{input}", method = RequestMethod.GET)
