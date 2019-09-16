@@ -23,6 +23,11 @@ import java.util.*;
 @RequestMapping("/im3community")
 public class CampaignController
 {
+    @RequestMapping(value = "")
+    public String hello() {
+        return "--- Indosat Community API Here ---";
+    }
+
     private static final Logger LOG = LoggerFactory.getLogger(CampaignController.class);
 
     @Autowired
@@ -41,13 +46,6 @@ public class CampaignController
     DailyCheckinResponse dailyCheckinResponse;
     @Autowired
     DailyCheckinService dailyCheckinService;
-
-
-    @RequestMapping("/")
-    public String hello() {
-    	return "Im3Community is working";
-    }
-
 
     @RequestMapping(value = "/checkheader/{input}", method = RequestMethod.GET)
     public void printHeader(@PathVariable("input") String input)
