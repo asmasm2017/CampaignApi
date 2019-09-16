@@ -36,12 +36,12 @@ public class SSPService {
     private static final Logger LOG = LoggerFactory.getLogger(SSPService.class);
 
     @Value("ssp.claimUrl")
-    //private final String claimUrl = "http://192.168.0.199:4081/claim/";
-    private final String claimUrl = "http://localhost:8098/claim/";
+    private final String claimUrl = "http://192.168.0.199:4081/claim/";
+    //private final String claimUrl = "http://localhost:8098/claim/";
 
     @Value("ssp.quotaUrl")
-    //private final String quotaUrl = "http://192.168.0.199:4081/PULLHandler/GetSubsInfoWS_PS/";
-    private final String quotaUrl = "http://192.168.0.199:8098/PULLHandler/GetSubsInfoWS_PS/";
+    private final String quotaUrl = "http://192.168.0.199:4081/PULLHandler/GetSubsInfoWS_PS/";
+//    private final String quotaUrl = "http://localhost:8098/PULLHandler/GetSubsInfoWS_PS/";
 
     private final String quotaBody = "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:get=\"http://www.example.org/GetSubsInfo/\"><soapenv:Header/><soapenv:Body><get:GetSubsInfoRequest><Eid>OFFD</Eid><Tid><<DATETIME>></Tid><Msisdn><<MSISDN>></Msisdn><IMSI></IMSI><Lang></Lang></get:GetSubsInfoRequest></soapenv:Body></soapenv:Envelope>";
 
