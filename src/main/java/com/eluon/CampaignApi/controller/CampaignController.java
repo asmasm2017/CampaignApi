@@ -23,6 +23,11 @@ import java.util.*;
 @RequestMapping("/im3community")
 public class CampaignController
 {
+    @RequestMapping(value = "")
+    public String hello() {
+        return "--- Indosat Community API Here ---";
+    }
+
     private static final Logger LOG = LoggerFactory.getLogger(CampaignController.class);
 
     @Autowired
@@ -41,10 +46,6 @@ public class CampaignController
     DailyCheckinResponse dailyCheckinResponse;
     @Autowired
     DailyCheckinService dailyCheckinService;
-
-
-
-
 
     @RequestMapping(value = "/checkheader/{input}", method = RequestMethod.GET)
     public void printHeader(@PathVariable("input") String input)
@@ -123,14 +124,14 @@ public class CampaignController
     @RequestMapping(value = "/claim" , method = RequestMethod.POST)
     public ClaimTest claimTest(@RequestHeader("msisdn") String msisdn,@RequestHeader("token") String encryptedToken)
     {
-       //ClaimTest claimTest = new ClaimTest("0","ok",new RewardValid("500M","7 days"));
+        //ClaimTest claimTest = new ClaimTest("0","ok",new RewardValid("500M","7 days"));
         ClaimTest claimTest= claimService.getClaimResponse(msisdn,encryptedToken);
         return claimTest;
     }
 
     @RequestMapping(value = "/msisdn_info" , method = RequestMethod.POST)
     public MsisdnInfoResponse msisdnInfo(@RequestHeader("msisdn") String encryptedMsisdn, @RequestHeader("token") String encryptedToken)
-   {
+    {
         MsisdnInfoResponse msisdnInfoResponse = null;
         try {
             msisdnInfoResponse = msisdnInfoService.getMsisdnInfoResponse(encryptedMsisdn, encryptedToken);
